@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Submission Form</title>
+    <link rel="stylesheet" href="CSS/AddProject.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button onclick="history.back()" class="go-back"> <i class="fas fa-arrow-left"></i></button>   
+            <h1>Project Submission Form</h1>
+        </header>
+        
+        <div class="form-container">
+            <form id="projectForm">
+                <div class="form-group">
+                    <label for="projectTitle" class="required">Project Title</label>
+                    <input type="text" id="projectTitle" name="projectTitle" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="projectDescription" class="required">Project Description / Abstract</label>
+                    <textarea id="projectDescription" name="projectDescription" required></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="projectType" class="required">Project Type</label>
+                        <select id="projectType" name="projectType" required>
+                            <option value="" disabled selected>Select Project Type</option>
+                            <option value="Research">Research</option>
+                            <option value="Consultancy">Consultancy</option>
+                            <option value="Sponsored">Sponsored</option>
+                            <option value="Extension">Extension</option>
+                            <option value="Collaborative">Collaborative</option>
+                            <option value="In-house">In-house</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="domain" class="required">Domain / Area of Work</label>
+                        <input type="text" id="domain" name="domain" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="startDate" class="required">Start Date</label>
+                        <input type="date" id="startDate" name="startDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="endDate">End Date</label>
+                        <input type="date" id="endDate" name="endDate">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ongoing">
+                        <input type="checkbox" id="ongoing" name="ongoing" style="width: auto; margin-right: 8px;"> 
+                        Mark as "Ongoing"
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label for="principalInvestigator" class="required">Principal Investigator (PI)</label>
+                    <input type="text" id="principalInvestigator" name="principalInvestigator" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="coInvestigators">Co-Investigators (if any)</label>
+                    <textarea id="coInvestigators" name="coInvestigators" placeholder="Enter names of co-investigators, one per line"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="collaboratingInstitutions">Collaborating Institutions / Departments</label>
+                    <textarea id="collaboratingInstitutions" name="collaboratingInstitutions" placeholder="Enter collaborating institutions or departments, one per line"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="githubLink">GitHub Link</label>
+                    <input type="url" id="githubLink" name="githubLink" placeholder="https://github.com/username/repository">
+                </div>
+                
+                <div class="button-group">
+                    <button type="button" class="secondary-button" id="resetButton">Reset Form</button>
+                    <button type="submit" id="submitButton">Submit Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Script to handle the "Ongoing" checkbox
+        document.getElementById('ongoing').addEventListener('change', function() {
+            const endDateField = document.getElementById('endDate');
+            endDateField.disabled = this.checked;
+            if (this.checked) {
+                endDateField.value = '';
+            }
+        });
+        
+        // Reset form functionality
+        document.getElementById('resetButton').addEventListener('click', function() {
+            document.getElementById('projectForm').reset();
+            document.getElementById('endDate').disabled = false;
+        });
+        
+        // Form submission handler
+        document.getElementById('projectForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Project submitted successfully! (This is a demo - no actual data is being sent)');
+            // In a real application, you would handle the form submission here
+        });
+    </script>
+</body>
+</html>

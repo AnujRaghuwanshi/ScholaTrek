@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seminar Log Entry</title>
+    <link rel="stylesheet" href="CSS/SeminarLog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button onclick="history.back()" class="go-back"> <i class="fas fa-arrow-left"></i></button>   
+            <h1>Seminar Log Entry</h1>
+        </header>
+        
+        <!-- Basic Seminar Information -->
+        <div class="section">
+            <div class="section-title">
+                <div class="section-icon">1</div>
+                Basic Seminar Information
+            </div>
+            <div class="section-content">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="seminar-title">Title of Seminar *</label>
+                        <input type="text" id="seminar-title" placeholder="Enter the title of the seminar" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="seminar-theme">Theme/Topic *</label>
+                        <input type="text" id="seminar-theme" placeholder="Enter the main theme or topic" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="seminar-type">Type of Seminar *</label>
+                        <select id="seminar-type" required>
+                            <option value="">Select seminar type</option>
+                            <option value="national">National</option>
+                            <option value="international">International</option>
+                            <option value="institutional">Institutional</option>
+                            <option value="departmental">Departmental</option>
+                            <option value="online">Online</option>
+                            <option value="offline">Offline</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Date and Duration -->
+        <div class="section">
+            <div class="section-title">
+                <div class="section-icon">2</div>
+                Date and Duration
+            </div>
+            <div class="section-content">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="seminar-date">Date(s) of Seminar *</label>
+                        <input type="date" id="seminar-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="seminar-duration">Duration *</label>
+                        <input type="text" id="seminar-duration" placeholder="e.g., 1 day, 3 hours" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Role in Seminar -->
+        <div class="section">
+            <div class="section-title">
+                <div class="section-icon">3</div>
+                Role in Seminar
+            </div>
+            <div class="section-content">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="seminar-role">Your Role *</label>
+                        <select id="seminar-role" required>
+                            <option value="">Select your role</option>
+                            <option value="attendee">Attendee</option>
+                            <option value="presenter">Presenter</option>
+                            <option value="speaker">Speaker</option>
+                            <option value="keynote">Keynote Speaker</option>
+                            <option value="organizer">Organizer</option>
+                            <option value="panelist">Panelist</option>
+                            <option value="moderator">Moderator</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Organized By -->
+        <div class="section">
+            <div class="section-title">
+                <div class="section-icon">4</div>
+                Organized By
+            </div>
+            <div class="section-content">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="organizing-body">Name of Organizing Body or Institution *</label>
+                        <input type="text" id="organizing-body" placeholder="e.g., IIT Delhi, AICTE, Internal Quality Assurance Cell" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Certificate Upload -->
+        <div class="section">
+            <div class="section-title">
+                <div class="section-icon">5</div>
+                Certificate(Optional)
+            </div>
+            <div class="section-content">
+                <div class="file-upload">
+                    <input type="file" id="certificate" accept=".pdf,.jpg,.jpeg,.png">
+                    <p>Drag and drop or click to upload your participation/presentation certificate</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Brief Description -->
+        <div class="section">
+            <div class="section-title">
+                <div class="section-icon">6</div>
+                Brief Description
+            </div>
+            <div class="section-content">
+                <div class="form-row">
+                    <div class="form-group accent-border">
+                        <label for="description">Description (100-250 words) *</label>
+                        <textarea id="description" placeholder="Describe your contribution, key takeaways, and any recognition received" required></textarea>
+                        <div class="word-count">0/250 words</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Seminar Outcome/Impact -->
+        <div class="section">
+            <div class="section-title">
+                <div class="section-icon">7</div>
+                Seminar Outcome/Impact
+            </div>
+            <div class="section-content">
+                <label>Select all that apply:</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="knowledge">
+                        <label for="knowledge">Knowledge enhancement</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="networking">
+                        <label for="networking">Networking</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="skill">
+                        <label for="skill">Skill improvement</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="collaboration">
+                        <label for="collaboration">Collaboration opportunity</label>
+                    </div>
+                </div>
+                
+                <div class="form-group" style="margin-top: 15px;">
+                    <label for="other-outcome">Other Outcomes (Optional)</label>
+                    <textarea id="other-outcome" placeholder="Describe any other outcomes or impact from this seminar"></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <div class="buttons">
+            <button type="button" class="btn-cancel">Cancel</button>
+            <button type="submit" class="btn-submit">Submit Log Entry</button>
+        </div>
+    </div>
+
+    <script>
+        // Word count functionality
+        const textarea = document.getElementById('description');
+        const wordCount = document.querySelector('.word-count');
+        
+        textarea.addEventListener('input', function() {
+            const text = this.value.trim();
+            const words = text ? text.split(/\s+/).length : 0;
+            wordCount.textContent = `${words}/250 words`;
+            
+            if (words < 100) {
+                wordCount.style.color = '#ff4d4d';
+            } else if (words > 250) {
+                wordCount.style.color = '#ff4d4d';
+            } else {
+                wordCount.style.color = '#666';
+            }
+        });
+    </script>
+</body>
+</html>

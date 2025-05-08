@@ -1,0 +1,236 @@
+:root {
+    --dark-blue: #1e2a3a;
+    --medium-blue: #2d3b4e;
+    --light-gray: #f5f7fa;
+    --metallic-gray: #b3b9c2;
+    --accent-brown: #a69483;
+    --text-light: #f5f7fa;
+    --text-dark: #333;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-gray);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    background-color: var(--dark-blue);
+    color: var(--text-light);
+    padding: 12px 20px;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+    flex-grow: 1;
+    text-align: center;
+}
+.go-back {
+    background-color: transparent;
+    color: var(--text-light);
+    border: 1px solid var(--text-light);
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.go-back:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.logo {
+    height: 50px;
+    width: 50px;
+    background-color: var(--light-gray);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--dark-blue);
+}
+
+.section {
+    margin-bottom: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.section-title {
+    background: linear-gradient(to right, var(--metallic-gray), #d1d5db);
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dark-blue);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+}
+
+.section-icon {
+    background-color: var(--dark-blue);
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    font-size: 12px;
+}
+
+.section-content {
+    padding: 20px;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px 15px;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 250px;
+    padding: 0 10px;
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--medium-blue);
+}
+
+input[type="text"],
+input[type="date"],
+input[type="file"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--accent-brown);
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.file-upload {
+    border: 2px dashed var(--metallic-gray);
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.file-upload:hover {
+    border-color: var(--accent-brown);
+}
+
+.file-upload p {
+    color: #666;
+    margin-top: 10px;
+}
+
+.checkbox-group {
+    margin-top: 5px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.checkbox-item input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.word-count {
+    font-size: 12px;
+    color: #666;
+    text-align: right;
+    margin-top: 5px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-cancel {
+    background-color: var(--metallic-gray);
+    color: var(--text-light);
+}
+
+.btn-submit {
+    background-color: var(--accent-brown);
+    color: white;
+}
+
+.btn-submit:hover {
+    background-color: #95836f;
+}
+.btn-cancel:hover {
+    background-color: #9da5b1;
+}
+
+
+.accent-border {
+    border-left: 3px solid var(--accent-brown);
+    padding-left: 15px;
+}
+

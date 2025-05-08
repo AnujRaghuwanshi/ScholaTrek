@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Self-Appraisal Form</title>
+    <link rel="stylesheet" href="CSS/appraisal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="module" src="JS/Appraisel.js" defer></script>
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button onclick="history.back()" class="go-back"> <i class="fas fa-arrow-left"></i></button>
+            <h1>Faculty Self-Appraisal Form</h1>
+        </header>
+        
+        <!-- Section 1: Personal & Institutional Information -->
+        <div class="section">
+            <div class="section-header">
+                <div style="display: flex; align-items: center;">
+                    <div class="section-number">1</div>
+                    Personal & Institutional Information
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="field-row">
+                    <div class="field">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" placeholder="Enter your full name">
+                    </div>
+                    <div class="field">
+                        <label for="employeeCode">Employee Code</label>
+                        <input type="text" id="employeeCode" placeholder="Enter your employee code">
+                    </div>
+                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <label for="designation">Designation</label>
+                        <input type="text" id="designation" placeholder="Enter your designation">
+                    </div>
+                    <div class="field">
+                        <label for="department">Department</label>
+                        <input type="text" id="department" placeholder="Enter your department">
+                    </div>
+                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <label for="facultyId">Faculty ID</label>
+                        <input type="text" id="facultyId" placeholder="Enter your faculty ID">
+                    </div>
+                    <div class="field">
+                        <label for="joiningDate">Date of Joining</label>
+                        <input type="date" id="joiningDate">
+                    </div>
+                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <label for="institutionName">Institution Name</label>
+                        <input type="text" id="institutionName" placeholder="Enter your institution name">
+                    </div>
+                    <div class="field">
+                        <label for="appraisalYear">Academic Year for Appraisal</label>
+                        <input type="text" id="appraisalYear" placeholder="e.g., 2024-2025">
+                    </div>
+                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Enter your email address">
+                    </div>
+                    <div class="field">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="Enter your phone number">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 2: Teaching & Instructional Activities -->
+        <div class="section">
+            <div class="section-header">
+                <div style="display: flex; align-items: center;">
+                    <div class="section-number">2</div>
+                    Teaching & Instructional Activities
+                </div>
+            </div>
+            <div class="section-body">
+                <h3>Courses Taught (Semester-wise)</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Course Name</th>
+                                <th>Semester</th>
+                                <th>Class Size</th>
+                                <th>Mode</th>
+                            </tr>
+                        </thead>
+                        <tbody id="course-body">
+                            <tr>
+                                <td><input type="text" placeholder="Course name"></td>
+                                <td><input type="text" placeholder="Semester"></td>
+                                <td><input type="number" placeholder="Size"></td>
+                                <td>
+                                    <select>
+                                        <option value="">Select Mode</option>
+                                        <option value="offline">Offline</option>
+                                        <option value="online">Online</option>
+                                        <option value="hybrid">Hybrid</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="add-row" id="course-body-button">+ Add Course</button>
+                
+                <div class="field-group field-highlight">
+                    <label for="innovations">Innovations in Teaching</label>
+                    <textarea id="innovations" placeholder="Describe your innovations in teaching (ICT tools, flipped classroom, etc.)"></textarea>
+                </div>
+                
+                <div class="field-row">
+                    <div class="field">
+                        <label for="feedback">Student Feedback Ratings (if available)</label>
+                        <input type="text" id="feedback" placeholder="Enter student feedback ratings">
+                    </div>
+                </div>
+                
+                <h3>Curriculum Development</h3>
+                <div class="field-row">
+                    <div class="field">
+                        <label for="newCourses">New Courses Designed</label>
+                        <textarea id="newCourses" placeholder="List new courses designed"></textarea>
+                    </div>
+                    <div class="field">
+                        <label for="syllabus">Syllabus Revision</label>
+                        <textarea id="syllabus" placeholder="Describe syllabus revisions"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 3: Research & Academic Contributions -->
+        <div class="section">
+            <div class="section-header">
+                <div style="display: flex; align-items: center;">
+                    <div class="section-number">3</div>
+                    Research & Academic Contributions
+                </div>
+            </div>
+            <div class="section-body">
+                <h3>Research Publications</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Journal Name</th>
+                                <th>Indexed</th>
+                                <th>DOI</th>
+                                <th>Year</th>
+                            </tr>
+                        </thead>
+                        <tbody id="research-body">
+                            <tr>
+                                <td><input type="text" placeholder="Publication title"></td>
+                                <td><input type="text" placeholder="Journal name"></td>
+                                <td>
+                                    <select>
+                                        <option value="">Select</option>
+                                        <option value="sci">SCI</option>
+                                        <option value="scopus">Scopus</option>
+                                        <option value="ugc">UGC-listed</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </td>
+                                <td><input type="text" placeholder="DOI"></td>
+                                <td><input type="number" placeholder="Year" min="1900" max="2100"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="add-row" id="research-body-button">+ Add Publication</button>
+                
+                <h3>Patents Filed/Granted</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Patent Number</th>
+                                <th>Status</th>
+                                <th>Year</th>
+                            </tr>
+                        </thead>
+                        <tbody id="patent-filled">
+                            <tr>
+                                <td><input type="text" placeholder="Patent title"></td>
+                                <td><input type="text" placeholder="Patent number"></td>
+                                <td>
+                                    <select>
+                                        <option value="">Select</option>
+                                        <option value="filed">Filed</option>
+                                        <option value="granted">Granted</option>
+                                    </select>
+                                </td>
+                                <td><input type="number" placeholder="Year"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="add-row" id="patent-filled-button">+ Add Patent</button>
+                
+                <h3>Research Grants</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Funding Agency</th>
+                                <th>Duration</th>
+                                <th>Amount (INR)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="research-grant">
+                            <tr>
+                                <td><input type="text" placeholder="Grant title"></td>
+                                <td><input type="text" placeholder="Funding agency"></td>
+                                <td><input type="text" placeholder="Duration"></td>
+                                <td><input type="number" placeholder="Amount"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="add-row" id="research-grant-button">+ Add Grant</button>
+                
+                <div class="field-group field-highlight">
+                    <label for="phd">Ph.D./M.Tech Students Supervised</label>
+                    <textarea id="phd" placeholder="List students supervised with their thesis titles and status"></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 4: Events & Academic Engagement -->
+        <div class="section">
+            <div class="section-header">
+                <div style="display: flex; align-items: center;">
+                    <div class="section-number">4</div>
+                    Events & Academic Engagement
+                </div>
+            </div>
+            <div class="section-body">
+                <h3>Seminars/Workshops/Conferences</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Role</th>
+                                <th>Date</th>
+                                <th>Venue</th>
+                            </tr>
+                        </thead>
+                        <tbody id="event">
+                            <tr>
+                                <td><input type="text" placeholder="Event title"></td>
+                                <td>
+                                    <select>
+                                        <option value="">Select</option>
+                                        <option value="attendee">Attendee</option>
+                                        <option value="speaker">Speaker</option>
+                                        <option value="organizer">Organizer</option>
+                                    </select>
+                                </td>
+                                <td><input type="date"></td>
+                                <td><input type="text" placeholder="Venue"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="add-row" id="event-button">+ Add Event</button>
+                
+                <div class="field-group field-highlight">
+                    <label for="fdp">Faculty Development Programs (FDPs) Attended/Conducted</label>
+                    <textarea id="fdp" placeholder="List FDPs attended or conducted with details"></textarea>
+                </div>
+                
+                <div class="field-group">
+                    <label for="moocs">MOOCs Created or Completed</label>
+                    <textarea id="moocs" placeholder="List MOOCs with platform, title, and completion date"></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 5: Projects & Community Services -->
+        <div class="section">
+            <div class="section-header">
+                <div style="display: flex; align-items: center;">
+                    <div class="section-number">5</div>
+                    Projects & Community Services
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="field-group field-highlight">
+                    <label for="projects">Ongoing/Completed Projects</label>
+                    <textarea id="projects" placeholder="List projects with title, role (PI/Co-PI), duration, and outcome"></textarea>
+                </div>
+                
+                <h3>Institutional/Community Development Activities</h3>
+                <div class="field-row">
+                    <div class="field">
+                        <label for="mentoring">Mentoring Programs</label>
+                        <textarea id="mentoring" placeholder="Describe mentoring activities"></textarea>
+                    </div>
+                    <div class="field">
+                        <label for="outreach">Outreach Initiatives</label>
+                        <textarea id="outreach" placeholder="Describe outreach activities"></textarea>
+                    </div>
+                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <label for="extension">Extension Activities</label>
+                        <textarea id="extension" placeholder="Describe extension activities"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 6: Administrative & Leadership Roles -->
+        <div class="section">
+            <div class="section-header">
+                <div style="display: flex; align-items: center;">
+                    <div class="section-number">6</div>
+                    Administrative & Leadership Roles
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="field-group">
+                    <label for="positions">Positions Held</label>
+                    <textarea id="positions" placeholder="List positions held (HOD, Dean, etc.) with duration"></textarea>
+                </div>
+                
+                <div class="field-group field-highlight">
+                    <label for="committees">Committee Participation</label>
+                    <textarea id="committees" placeholder="List committees (NAAC, NBA, IQAC, etc.) with your role"></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 7: Awards & Recognitions -->
+        <div class="section">
+            <div class="section-header">
+                <div style="display: flex; align-items: center;">
+                    <div class="section-number">7</div>
+                    Awards & Recognitions
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title of Award</th>
+                                <th>Awarding Body</th>
+                                <th>Year</th>
+                            </tr>
+                        </thead>
+                        <tbody id="awards">
+                            <tr>
+                                <td><input type="text" placeholder="Award title"></td>
+                                <td><input type="text" placeholder="Awarding body"></td>
+                                <td><input type="number" placeholder="Year"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="add-row" id="awards-button">+ Add Award</button>
+            </div>
+        </div>
+        
+        <!-- Section 8: Future Goals & Development Plan -->
+        <div class="section">
+            <div class="section-header">
+                <div style="display: flex; align-items: center;">
+                    <div class="section-number">8</div>
+                    Future Goals & Development Plan
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="field-row">
+                    <div class="field">
+                        <label for="teachingGoals">Teaching Goals</label>
+                        <textarea id="teachingGoals" placeholder="Describe your teaching goals for the next academic year"></textarea>
+                    </div>
+                    <div class="field">
+                        <label for="researchGoals">Research Goals</label>
+                        <textarea id="researchGoals" placeholder="Describe your research goals for the next academic year"></textarea>
+                    </div>
+                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <label for="skills">Skill/Technology to be learned</label>
+                        <textarea id="skills" placeholder="List skills or technologies you plan to learn"></textarea>
+                    </div>
+                    <div class="field">
+                        <label for="training">Training Needs Identified</label>
+                        <textarea id="training" placeholder="Identify training needs for your professional development"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 9: Declaration & Submission -->
+        <div class="section">
+            <div class="section-header">
+                <div style="display: flex; align-items: center;">
+                    <div class="section-number">9</div>
+                    Declaration & Submission
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="declaration">
+                    <label for="declaration">I hereby declare that all the information provided is true to the best of my knowledge.</label>
+                </div>
+                
+                <div class="field-row">
+                    <div class="field">
+                        <label for="submissionDate">Date of Submission</label>
+                        <input type="date" id="submissionDate">
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button type="button" class="btn-cancel">Cancel</button>
+                    <button type="submit">Submit Appraisal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

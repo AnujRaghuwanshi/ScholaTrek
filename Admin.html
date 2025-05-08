@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Self-Appraisal Admin Panel</title>
+    <link rel="stylesheet" href="CSS/Admin.css">
+    <script src="https://kit.fontawesome.com/075e655501.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="container">
+        <button class="hamburger" id="hamburger">&#9776;</button> <!-- Unicode for ☰ -->
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="logo">
+                <h2>Schola<span>Trek</span></h2>
+            </div>
+            <div class="nav-menu">
+                <div class="menu-item active">
+                    📊
+                    <span>Dashboard</span>
+                </div>
+                <div class="menu-item">
+                    📝
+                    <span>Submissions</span>
+                </div>
+                <div class="menu-item">
+                    👨‍🏫
+                    <span>Faculty Directory</span>
+                </div>
+                <div class="menu-item">
+                    📈
+                    <span>Reports</span>
+                </div>
+                <div class="menu-item">
+                    ⚙️
+                    <span>Settings</span>
+                </div>
+                <div class="menu-item">
+                    🔍
+                    <span>Advanced Search</span>
+                </div>
+                <div class="menu-item">
+                    📤
+                    <span>Export Data</span>
+                </div>
+                <div class="menu-item">
+                    ❓
+                    <span>Help</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Admin Dashboard</h1>
+                <div class="user-profile">
+                    <div class="profile-img">A</div>
+                    <span>Admin User</span>
+                </div>
+            </div>
+            
+            <!-- Dashboard Stats -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-icon">📝</div>
+                    <div class="stat-title">Total Submissions</div>
+                    <div class="stat-value">247</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏳</div>
+                    <div class="stat-title">Pending Review</div>
+                    <div class="stat-value">42</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-title">Reviewed</div>
+                    <div class="stat-value">205</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-title">Publications</div>
+                    <div class="stat-value">183</div>
+                </div>
+            </div>
+            
+            <!-- Search & Filter -->
+            <div class="search-container">
+                <input type="text" class="search-box" placeholder="Search by name, employee code, or department...">
+            </div>
+            
+            <div class="filter-options">
+                <select class="filter-select">
+                    <option>Sort by: Name</option>
+                    <option>Sort by: Employee Code</option>
+                    <option>Sort by: Date of Submission</option>
+                    <option>Sort by: Department</option>
+                </select>
+                
+                <select class="filter-select">
+                    <option>Status: All</option>
+                    <option>Status: Pending</option>
+                    <option>Status: Reviewed</option>
+                </select>
+                
+                <select class="filter-select">
+                    <option>Department: All</option>
+                    <option>Department: Computer Science</option>
+                    <option>Department: Engineering</option>
+                    <option>Department: Management</option>
+                    <option>Department: Humanities</option>
+                </select>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary">
+                    📥 Download All
+                </button>
+                <button class="btn btn-secondary">
+                    📊 Generate Report
+                </button>
+            </div>
+            
+            <!-- Submissions Table -->
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Faculty Name</th>
+                        <th>Employee Code</th>
+                        <th>Department</th>
+                        <th>Submission Date</th>
+                        <th>Publications</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dr. Rajesh Kumar</td>
+                        <td>FAC001</td>
+                        <td>Computer Science</td>
+                        <td>24 Mar 2025</td>
+                        <td>12</td>
+                        <td><span class="status status-reviewed">Reviewed</span></td>
+                        <td class="action-cell">
+                            <button class="action-btn view-btn" onclick="openModal()">View</button>
+                            <button class="action-btn download-btn">PDF</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Prof. Ananya Singh</td>
+                        <td>FAC018</td>
+                        <td>Management</td>
+                        <td>01 Apr 2025</td>
+                        <td>5</td>
+                        <td><span class="status status-pending">Pending</span></td>
+                        <td class="action-cell">
+                            <button class="action-btn view-btn" onclick="openModal()">View</button>
+                            <button class="action-btn download-btn">PDF</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Dr. Mehta Patel</td>
+                        <td>FAC042</td>
+                        <td>Engineering</td>
+                        <td>28 Mar 2025</td>
+                        <td>8</td>
+                        <td><span class="status status-reviewed">Reviewed</span></td>
+                        <td class="action-cell">
+                            <button class="action-btn view-btn" onclick="openModal()">View</button>
+                            <button class="action-btn download-btn">PDF</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Prof. David Wilson</td>
+                        <td>FAC056</td>
+                        <td>Humanities</td>
+                        <td>02 Apr 2025</td>
+                        <td>4</td>
+                        <td><span class="status status-pending">Pending</span></td>
+                        <td class="action-cell">
+                            <button class="action-btn view-btn" onclick="openModal()">View</button>
+                            <button class="action-btn download-btn">PDF</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Dr. Sunita Desai</td>
+                        <td>FAC073</td>
+                        <td>Computer Science</td>
+                        <td>31 Mar 2025</td>
+                        <td>15</td>
+                        <td><span class="status status-reviewed">Reviewed</span></td>
+                        <td class="action-cell">
+                            <button class="action-btn view-btn" onclick="openModal()">View</button>
+                            <button class="action-btn download-btn">PDF</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <div class="page-item">Prev</div>
+                <div class="page-item active">1</div>
+                <div class="page-item">2</div>
+                <div class="page-item">3</div>
+                <div class="page-item">Next</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for Faculty Details -->
+    <div class="modal" id="facultyModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-header">
+                <h2>Faculty Self-Appraisal Details</h2>
+            </div>
+            
+            <div class="faculty-info">
+                <div class="info-group">
+                    <div class="info-label">Name</div>
+                    <div class="info-value">Dr. Rajesh Kumar</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Employee Code</div>
+                    <div class="info-value">FAC001</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Department</div>
+                    <div class="info-value">Computer Science</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Designation</div>
+                    <div class="info-value">Associate Professor</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Email</div>
+                    <div class="info-value">rajesh.kumar@university.edu</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Submission Date</div>
+                    <div class="info-value">24 Mar 2025</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Teaching Experience</div>
+                    <div class="info-value">12 years</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Status</div>
+                    <div class="info-value"><span class="status status-reviewed">Reviewed</span></div>
+                </div>
+            </div>
+            
+            <div class="activity-section">
+                <div class="section-title">Research Publications</div>
+                <ul>
+                    <li>Kumar, R., & Smith, J. (2024). "Advanced Machine Learning Algorithms for Medical Diagnosis." Journal of AI in Healthcare, 15(2), 112-128.</li>
+                    <li>Kumar, R., Patel, S., & Johnson, D. (2024). "Neural Networks in Image Processing: A Comprehensive Review." IEEE Transactions on Image Processing, 29(4), 1845-1860.</li>
+                    <li>Wilson, P., & Kumar, R. (2023). "Cloud Computing Architectures for Big Data Analytics." International Journal of Cloud Computing, 8(3), 224-241.</li>
+                </ul>
+            </div>
+            
+            <div class="activity-section">
+                <div class="section-title">Seminars & Conferences</div>
+                <ul>
+                    <li>International Conference on Computer Science and Information Technology (ICCSIT), Speaker, "Future of AI in Education," March 2025</li>
+                    <li>Workshop on Data Privacy, Organizer, University Campus, February 2025</li>
+                    <li>Annual Faculty Development Program, Participant, "Research Methodologies," January 2025</li>
+                </ul>
+            </div>
+            
+            <div class="activity-section">
+                <div class="section-title">Projects</div>
+                <ul>
+                    <li>Principal Investigator, "Smart Campus Initiative," University Grant, 2024-present</li>
+                    <li>Co-Investigator, "AI-Based Learning Management System," Government Research Grant, 2023-2025</li>
+                </ul>
+            </div>
+            
+            <div class="activity-section">
+                <div class="section-title">Teaching & Lectures</div>
+                <ul>
+                    <li>CSE401: Advanced Database Systems, Fall 2024, Student Rating: 4.8/5</li>
+                    <li>CSE302: Machine Learning Fundamentals, Spring 2025, Student Rating: 4.7/5</li>
+                    <li>Guest Lecturer, "Blockchain Technology," Management Department, February 2025</li>
+                </ul>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary">
+                    <i>📥</i> Download PDF
+                </button>
+                <button class="btn btn-secondary">
+                    <i>✏️</i> Add Note
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Modal functionality
+        const modal = document.getElementById("facultyModal");
+        
+        function openModal() {
+            modal.style.display = "flex";
+        }
+        
+        function closeModal() {
+            modal.style.display = "none";
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.querySelector('.sidebar');
+
+    hamburger.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+        document.body.classList.toggle("no-scroll", sidebar.classList.contains("open"));
+    });
+
+    let lastWindowWidth = window.innerWidth;
+
+     window.addEventListener("resize", () => {
+    const currentWidth = window.innerWidth;
+
+    // If resizing from >1000px to <=1000px
+    if (lastWindowWidth > 1000 && currentWidth <= 1000) {
+        sidebar.classList.remove("open");
+        document.body.classList.remove("no-scroll"); // Unfreeze
+    }
+
+    lastWindowWidth = currentWidth;
+});
+
+    </script>
+</body>
+</html>

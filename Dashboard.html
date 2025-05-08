@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ScholaTrek - Faculty Dashboard</title>
+    <link rel="stylesheet" href="CSS/dashboard.css" />
+    <script type="module" src="JS/firebaseConfig.js" defer></script>
+    <script type="module" src="JS/Fetch_Profile.js" defer></script>
+    <!-- sweet-alert -->
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+   <!-- font awesome -->
+    <script
+      src="https://kit.fontawesome.com/075e655501.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="sidebar">
+        <div class="sidebar-logo">
+          <h2>
+            <span class="schola">Schola</span><span class="trek">Trek</span>
+          </h2>
+        </div>
+        
+        <div class="menu-section">Main</div>
+        <ul class="sidebar-menu">
+          <li><a href="#" class="active">📊 <span>Dashboard</span></a></li>
+          <li><a href="#">📝 <span>Appraisal Form</span></a></li>
+          <li><a href="#">📚 <span>Publications</span></a></li>
+          <li><a href="#">🎯 <span>Research Projects</span></a></li>
+        </ul>
+        
+        <div class="menu-section">Activities</div>
+        <ul class="sidebar-menu">
+          <li><a href="#">🏫 <span>Seminars</span></a></li>
+          <li><a href="#">📅 <span>Events</span></a></li>
+        </ul>
+        
+        <div class="menu-section">Account</div>
+        <ul class="sidebar-menu">
+          <li>
+            <a href="#"><i class="fa-solid fa-gear"></i> <span>Settings</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content" id="mainContent">
+        <!-- Top Bar -->
+        <div class="top-bar">
+          <div class="page-title">
+            <h1>Faculty Dashboard</h1>
+          </div>
+
+          <div class="user-actions">
+            <div class="search-bar">
+              <i>🔍</i>
+              <input type="text" placeholder="Search..." />
+            </div>
+
+            <div class="user-profile" onclick="toggleProfileCard()">
+              <div class="profile-initial" id="user-initial"></div>
+              <div class="user-info">
+                <div class="user-name" id="user-name"></div>
+              </div>
+            </div>
+            <!-- Profile Card -->
+            <div id="profile-card" class="profile-card">
+              <div class="card-header"></div>
+              <div class="card-content">
+                <div class="initial-circle" id="profile-initial"></div>
+                <h2 class="user-name" id="profile-name">Loading...</h2>
+                <h4 id="user-role">Loading...</h4>
+            
+                <div class="info-item">
+                  <label for="user-email">Email :-</label> <span id="user-email">Loading...</span>
+                </div>
+                <div class="info-item">
+                  <label for="user-employee-code">Employee-Code :-</label> <span id="user-employee-code">Loading...</span>
+                </div>
+                <div class="info-item">
+                  <label for="user-department">Department :-</label> <span id="user-department">Loading...</span>
+                </div>
+                <button  class="logout-btn" id="logout-button"><i class="fa-solid fa-right-from-bracket"></i> <span>Log out</span></button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="dashboard-section">
+          <div class="quick-actions">
+            <a href="Appraisal_form.html" class="action-button">
+              <div class="action-icon">📝</div>
+              <div class="action-label">New Appraisal</div>
+            </a>
+            <a href="#publication" class="action-button">
+              <div class="action-icon">📚</div>
+              <div class="action-label">Add Publication</div>
+            </a>
+            <a href="seminarLog.html" class="action-button">
+              <div class="action-icon">🏫</div>
+              <div class="action-label">Log Seminar</div>
+            </a>
+            <a href="AddProject.html" class="action-button">
+              <div class="action-icon">🎯</div>
+              <div class="action-label">Add Project</div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Dashboard Stats -->
+        <div class="dashboard-section">
+          <div class="dashboard-cards">
+            <div class="card stat-card">
+              <div class="stat-icon">📚</div>
+              <div class="stat-info">
+                <h3>12</h3>
+                <p>Research Publications</p>
+              </div>
+            </div>
+
+            <div class="card stat-card">
+              <div class="stat-icon">🎯</div>
+              <div class="stat-info">
+                <h3>3</h3>
+                <p>Active Projects</p>
+              </div>
+            </div>
+
+            <div class="card stat-card">
+              <div class="stat-icon">🏫</div>
+              <div class="stat-info">
+                <h3>8</h3>
+                <p>Seminars Conducted</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Activity Charts -->
+        <div class="dashboard-section">
+          <div class="chart-container">
+            <div class="chart-header">
+              <div class="chart-title">
+                <h3>Academic Performance Overview</h3>
+              </div>
+              <div class="chart-filters">
+                <select>
+                  <option>Last 6 Months</option>
+                  <option>Last Year</option>
+                  <option>All Time</option>
+                </select>
+              </div>
+            </div>
+            <div class="chart-body">
+              <div
+                style="
+                  width: 100%;
+                  height: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: #777;
+                "
+              >
+                [Performance Chart Visualization]
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div class="two-columns">
+          <!-- Recent Publications -->
+          <div class="card">
+            <div class="section-title">
+              <h2>Recent Publications</h2>
+              <a href="#">View All</a>
+            </div>
+            <ul class="item-list">
+              <li class="list-item">
+                <h4>
+                  Innovative Approaches to Faculty Self-Appraisal in Higher
+                  Education
+                </h4>
+                <p>Journal of Educational Research, Vol. 42</p>
+                <div class="meta">
+                  <span>Mar 15, 2025</span>
+                  <span>Citation Count: 8</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Upcoming Events -->
+          <div class="card">
+            <div class="section-title">
+              <h2>Upcoming Events</h2>
+              <a href="#">View All</a>
+            </div>
+            <ul class="item-list event-list">
+              <li class="list-item">
+                <div class="event-date">
+                  <span class="month">Apr</span>
+                  <span class="day">12</span>
+                </div>
+                <div class="event-details">
+                  <h4>Educational Technology Conference</h4>
+                  <p>Virtual Event</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Recent Activities -->
+        <div class="dashboard-section">
+          <div class="section-title">
+            <h2>Recent Activities</h2>
+            <a href="#">View All</a>
+          </div>
+          <div class="activities-list">
+            <div class="activity-item">
+              <div class="activity-icon">
+                <i>📚</i>
+              </div>
+              <div class="activity-details">
+                <h4>Publication Added</h4>
+                <p>
+                  You added a new publication "Innovative Approaches to Faculty
+                  Self-Appraisal in Higher Education"
+                </p>
+              </div>
+              <div class="activity-time">2 days ago</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Entry Form -->
+        <div class="form-section" id="publication">
+          <h3 class="form-title">Quick Entry - Add Publication</h3>
+          <form>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" >Publication Title</label>
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="Enter publication title" id="Publication_title"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Publication Type</label>
+                <select class="form-input" id="Publication_type">
+                  <option disabled selected>Select</option>
+                  <option>Journal Article</option>
+                  <option>Conference Paper</option>
+                  <option>Book Chapter</option>
+                  <option>Book</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Journal/Conference Name</label>
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="Enter journal or conference name" id="Publication_journal"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Publication Date</label>
+                <input type="date" class="form-input" id="Publication_date"/>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">DOI</label>
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="Enter DOI" id="Publication_DOI"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Co-authors</label>
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="Enter co-authors (comma separated)" id="Publication_CoAuthors"
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Indexed In</label>
+                <select class="form-input" id="Publication_Indexed">
+                  <option disabled selected>Select</option>
+                  <option>Scopus</option>
+                  <option>Web of Science</option>
+                  <option>UGC Care</option>
+                  <option>None</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Impact Factor (if any)</label>
+                <input
+                  type="number"
+                  step="0.01"
+                  class="form-input"
+                  placeholder="Enter impact factor" id="Publication_Impact"
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Upload Publication PDF</label>
+                <input type="file" class="form-input" accept=".pdf" id="Publication_pdf"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label"
+                  >Upload Indexing Proof</label
+                >
+                <input type="file" class="form-input" accept=".pdf,.jpg,.png" id="Publication_Indexing"/>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Author Role</label>
+                <select class="form-input" id="Author_Role">
+                  <option disabled selected>Select</option>
+                  <option>First Author</option>
+                  <option>Corresponding Author</option>
+                  <option>Co-author</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Funding Agency (if any)</label>
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="Enter funding agency name" id="Publication_Funding"
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group" style="width: 100%">
+                <label class="form-label">Abstract</label>
+                <textarea
+                  class="form-input"
+                  rows="4"
+                  placeholder="Enter abstract here..." id="Publication_text"
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="form-row form-buttons">
+              <button type="button" class="btn-cancel">Cancel</button>
+              <button type="submit" class="form-submit">
+                Submit Publication
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    // Set the first letter in the circle
+    // window.onload = function () {
+    //   const name = document.getElementById("user-name").innerText.trim();
+    //   const initial = name.charAt(name.indexOf(" ") + 1).toUpperCase();
+    //   document.getElementById("profile-initial").innerText = initial;
+    //   document.querySelector(".initial-circle").innerText = initial;
+      
+    // };
+
+    function toggleProfileCard() {
+      const card = document.getElementById("profile-card");
+      card.style.display = card.style.display === "block" ? "none" : "block";
+    }
+   
+    // Hide profile card when clicking outside
+    document.addEventListener("click", function (event) {
+      const profile = document.querySelector(".user-profile");
+      const card = document.getElementById("profile-card");
+
+      if (!profile.contains(event.target) && !card.contains(event.target)) {
+        card.style.display = "none";
+      }
+    });
+
+
+  </script>
+</html>
