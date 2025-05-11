@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Submission Form</title>
     <link rel="stylesheet" href="CSS/AddProject.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="module" src="JS/SubmitProject.js" defer></script>
+    <script type="module" src="JS/firebaseConfig.js"></script>
 </head>
 <body>
     <div class="container">
@@ -75,18 +77,14 @@
                     <textarea id="coInvestigators" name="coInvestigators" placeholder="Enter names of co-investigators, one per line"></textarea>
                 </div>
                 
+            
                 <div class="form-group">
-                    <label for="collaboratingInstitutions">Collaborating Institutions / Departments</label>
-                    <textarea id="collaboratingInstitutions" name="collaboratingInstitutions" placeholder="Enter collaborating institutions or departments, one per line"></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="githubLink">GitHub Link</label>
-                    <input type="url" id="githubLink" name="githubLink" placeholder="https://github.com/username/repository">
+                    <label for="githubLink" class="required">GitHub Link</label>
+                    <input type="url" id="githubLink" name="githubLink" placeholder="https://github.com/username/repository" required>
                 </div>
                 
                 <div class="button-group">
-                    <button type="button" class="secondary-button" id="resetButton">Reset Form</button>
+                    <button type="button" class="secondary-button" id="resetButton">Cancel</button>
                     <button type="submit" id="submitButton">Submit Project</button>
                 </div>
             </form>
@@ -99,7 +97,13 @@
             const endDateField = document.getElementById('endDate');
             endDateField.disabled = this.checked;
             if (this.checked) {
-                endDateField.value = '';
+              endDateField.type = 'text';
+              endDateField.value = 'ongoing';
+              endDateField.disabled = true;
+            } else {
+              endDateField.type = 'date';
+              endDateField.value = '';
+              endDateField.disabled = false;
             }
         });
         
@@ -109,12 +113,7 @@
             document.getElementById('endDate').disabled = false;
         });
         
-        // Form submission handler
-        document.getElementById('projectForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            alert('Project submitted successfully! (This is a demo - no actual data is being sent)');
-            // In a real application, you would handle the form submission here
-        });
+
     </script>
 </body>
 </html>

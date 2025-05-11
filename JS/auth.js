@@ -20,6 +20,7 @@ async function signUp() {
     const name = document.getElementById('full-name').value;
     const role = document.getElementById('user-type').value;
     const Ecode = document.getElementById('employee-code').value;   
+    const Ccode = document.getElementById('college-code').value; 
     const email = document.getElementById("signup-email").value;
     const dept = document.getElementById('department').value;
     const password = document.getElementById("signup-password").value;
@@ -49,6 +50,7 @@ async function signUp() {
             name: name,
             role: role,
             employeeCode: Ecode,
+            CollegeCode: Ccode,
             department: dept,
             password: password,
             createdAt: new Date().toISOString(), // Store timestamp

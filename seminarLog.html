@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="seminarEntry">
         <header>
             <button onclick="history.back()" class="go-back"> <i class="fas fa-arrow-left"></i></button>   
             <h1>Seminar Log Entry</h1>
@@ -137,35 +137,22 @@
                     <div class="form-group accent-border">
                         <label for="description">Description (100-250 words) *</label>
                         <textarea id="description" placeholder="Describe your contribution, key takeaways, and any recognition received" required></textarea>
-                        <div class="word-count">0/250 words</div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="buttons">
-            <button type="button" class="btn-cancel">Cancel</button>
+            <button type="button" class="btn-cancel" id="reset-button">Cancel</button>
             <button type="submit" class="btn-submit">Submit Log Entry</button>
         </div>
     </div>
 
     <script>
-        // Word count functionality
-        const textarea = document.getElementById('description');
-        const wordCount = document.querySelector('.word-count');
-        
-        textarea.addEventListener('input', function() {
-            const text = this.value.trim();
-            const words = text ? text.split(/\s+/).length : 0;
-            wordCount.textContent = `${words}/250 words`;
-            
-            if (words < 100) {
-                wordCount.style.color = '#ff4d4d';
-            } else if (words > 250) {
-                wordCount.style.color = '#ff4d4d';
-            } else {
-                wordCount.style.color = '#666';
-            }
-        });
+       
+     document.getElementById("reset-button").addEventListener("click",function(e){
+       e.preventDefault();
+       document.querySelectorAll("#seminarEntry input, #seminarEntry select, #seminarEntry textarea").forEach(el => el.value = "");
+    });
     </script>
 </body>
 </html>

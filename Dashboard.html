@@ -6,7 +6,12 @@
     <title>ScholaTrek - Faculty Dashboard</title>
     <link rel="stylesheet" href="CSS/dashboard.css" />
     <script type="module" src="JS/firebaseConfig.js" defer></script>
-    <script type="module" src="JS/Fetch_Profile.js" defer></script>
+    <script type="module" src="JS/Fetch_Profile.js"></script>
+    <script type="module" src="JS/AddPubliation.js"></script>
+
+    <!-- Fetch Publications  -->
+     <script type="module" src="JS/FetchPublications.js"></script>
+
     <!-- sweet-alert -->
     <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
@@ -15,6 +20,7 @@
       src="https://kit.fontawesome.com/075e655501.js"
       crossorigin="anonymous"
     ></script>
+
   </head>
   <body>
     <div class="dashboard-container">
@@ -28,15 +34,15 @@
         <div class="menu-section">Main</div>
         <ul class="sidebar-menu">
           <li><a href="#" class="active">📊 <span>Dashboard</span></a></li>
-          <li><a href="#">📝 <span>Appraisal Form</span></a></li>
+          <li><a href="#">📝 <span>Appraisal</span></a></li>
           <li><a href="#">📚 <span>Publications</span></a></li>
-          <li><a href="#">🎯 <span>Research Projects</span></a></li>
+          <li><a href="#">🎯 <span>Projects</span></a></li>
         </ul>
         
         <div class="menu-section">Activities</div>
         <ul class="sidebar-menu">
           <li><a href="#">🏫 <span>Seminars</span></a></li>
-          <li><a href="#">📅 <span>Events</span></a></li>
+          <!-- <li><a href="#">📅 <span>Events</span></a></li> -->
         </ul>
         
         <div class="menu-section">Account</div>
@@ -114,7 +120,7 @@
             <div class="card stat-card">
               <div class="stat-icon">📚</div>
               <div class="stat-info">
-                <h3>12</h3>
+                <h3 id="publication-count">0</h3>
                 <p>Research Publications</p>
               </div>
             </div>
@@ -122,7 +128,7 @@
             <div class="card stat-card">
               <div class="stat-icon">🎯</div>
               <div class="stat-info">
-                <h3>3</h3>
+                <h3 id="project-count">0</h3>
                 <p>Active Projects</p>
               </div>
             </div>
@@ -130,7 +136,7 @@
             <div class="card stat-card">
               <div class="stat-icon">🏫</div>
               <div class="stat-info">
-                <h3>8</h3>
+                <h3>0</h3>
                 <p>Seminars Conducted</p>
               </div>
             </div>
@@ -139,7 +145,7 @@
         </div>
 
         <!-- Activity Charts -->
-        <div class="dashboard-section">
+        <!-- <div class="dashboard-section">
           <div class="chart-container">
             <div class="chart-header">
               <div class="chart-title">
@@ -168,7 +174,8 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
+
 
         <!-- Two Column Layout -->
         <div class="two-columns">
@@ -178,23 +185,16 @@
               <h2>Recent Publications</h2>
               <a href="#">View All</a>
             </div>
-            <ul class="item-list">
-              <li class="list-item">
-                <h4>
-                  Innovative Approaches to Faculty Self-Appraisal in Higher
-                  Education
-                </h4>
-                <p>Journal of Educational Research, Vol. 42</p>
-                <div class="meta">
-                  <span>Mar 15, 2025</span>
-                  <span>Citation Count: 8</span>
-                </div>
-              </li>
+            <ul class="item-list" id="Publication-list">
+             
             </ul>
+            <p id="no-publications-msg" style="display: none; color: gray; text-align: center;">
+              No Publications Found
+            </p>
           </div>
 
           <!-- Upcoming Events -->
-          <div class="card">
+          <!-- <div class="card">
             <div class="section-title">
               <h2>Upcoming Events</h2>
               <a href="#">View All</a>
@@ -211,21 +211,20 @@
                 </div>
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
 
         <!-- Recent Activities -->
         <div class="dashboard-section">
           <div class="section-title">
             <h2>Recent Activities</h2>
-            <a href="#">View All</a>
           </div>
-          <div class="activities-list">
+          <div class="activities-list" id="recent-activity-list">
             <div class="activity-item">
               <div class="activity-icon">
                 <i>📚</i>
               </div>
-              <div class="activity-details">
+              <div class="activity-details" id="recent-activity-list">
                 <h4>Publication Added</h4>
                 <p>
                   You added a new publication "Innovative Approaches to Faculty
@@ -304,6 +303,7 @@
                   <option disabled selected>Select</option>
                   <option>Scopus</option>
                   <option>Web of Science</option>
+                  <option>Google Scholar</option>
                   <option>UGC Care</option>
                   <option>None</option>
                 </select>
