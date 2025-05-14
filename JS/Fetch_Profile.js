@@ -38,6 +38,7 @@ async function fetchUserDetails(uid) {
     } catch (error) {
         console.error(error);
         alert("Error fetching user details: " + error.message);
+        logout();
     }
 }
 

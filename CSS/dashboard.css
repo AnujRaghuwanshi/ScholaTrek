@@ -732,22 +732,29 @@ body {
 .info-item i {
    color: #3b82f6;
 }
-.logout-btn{
-    display: flex;
-    background: none;
-    color: red;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
-    gap: 8px;
-    margin-left: -16px;
+.logout-btn {
+  background-color: #f8f9fa;
+  color: #495057;
+  border: 1px solid #ced4da;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  left: -5rem;
+  top: 0.5rem;
 }
 
-.logout-btn span{
-    margin-top: -5px;
+.logout-btn:hover {
+  background-color: #e9394f; 
+  color: white;
+  border-color: #e9394f;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(233, 57, 79, 0.25);
 }
+
 
 /* Media query for screens below 990px */
 @media (max-width: 992px) {

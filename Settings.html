@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Settings</title>
+    <style>
+        :root {
+            --dark-blue: #1e2a3a;
+            --medium-blue: #2d3b4e;
+            --light-gray: #f5f7fa;
+            --metallic-gray: #b3b9c2;
+            --accent-brown: #a69483;
+            --text-light: #f5f7fa;
+            --text-dark: #333;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .settings-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+        }
+
+        .settings-header {
+            background-color: var(--dark-blue);
+            color: var(--text-light);
+            padding: 20px;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            margin: -30px -30px 30px;
+        }
+
+        .settings-header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .settings-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: var(--light-gray);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .settings-section:hover {
+            box-shadow: var(--box-shadow);
+        }
+
+        .settings-section h2 {
+            color: var(--dark-blue);
+            margin-bottom: 15px;
+            font-size: 18px;
+            border-bottom: 2px solid var(--accent-brown);
+            padding-bottom: 10px;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: white;
+            border-radius: var(--border-radius);
+        }
+
+        .setting-item-content {
+            flex-grow: 1;
+        }
+
+        .setting-item-label {
+            font-weight: bold;
+            color: var(--medium-blue);
+        }
+
+        .setting-item-value {
+            color: var(--metallic-gray);
+            margin-left: 15px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: bold;
+        }
+
+        .btn-change {
+            background-color: var(--accent-brown);
+            color: white;
+        }
+
+        .btn-change:hover {
+            background-color: var(--dark-blue);
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #a71d2a;
+        }
+
+        @media (max-width: 600px) {
+            .settings-container {
+                margin: 20px 10px;
+                padding: 15px;
+            }
+
+            .setting-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .setting-item-value {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="settings-container">
+        <div class="settings-header">
+            <h1>Account Settings</h1>
+            <p>Manage your account preferences and security</p>
+        </div>
+
+        <div class="settings-section">
+            <h2>Personal Information</h2>
+            <div class="setting-item">
+                <div class="setting-item-content">
+                    <span class="setting-item-label">Username</span>
+                    <span class="setting-item-value">johndoe123</span>
+                </div>
+                <button class="btn btn-change">Change Username</button>
+            </div>
+            <div class="setting-item">
+                <div class="setting-item-content">
+                    <span class="setting-item-label">Email</span>
+                    <span class="setting-item-value">johndoe@example.com</span>
+                </div>
+                <button class="btn btn-change">Change Email</button>
+            </div>
+            <div class="setting-item">
+                <div class="setting-item-content">
+                    <span class="setting-item-label">Department</span>
+                    <span class="setting-item-value">Computer Science</span>
+                </div>
+                <button class="btn btn-change">Change Department</button>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h2>Account Security</h2>
+            <div class="setting-item">
+                <div class="setting-item-content">
+                    <span class="setting-item-label">Password</span>
+                    <span class="setting-item-value">********</span>
+                </div>
+                <button class="btn btn-change">Reset Password</button>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h2>Danger Zone</h2>
+            <div class="setting-item">
+                <div class="setting-item-content">
+                    <span class="setting-item-label">Delete Account</span>
+                    <span class="setting-item-value">Permanently remove your account and all associated data</span>
+                </div>
+                <button class="btn btn-danger">Delete Account</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -9,19 +9,26 @@ document.getElementById("Verify-Button").addEventListener("click",function(event
 
 async function verifyDOI() {
     const doi = document.getElementById("Publication_DOI").value.trim();
-    const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = '<span style="color: orange; font-weight: bold">Pending</span>';
-
+    
     const submitButton = document.getElementById("submit-button");
     const userTitle = document.getElementById("Publication_title").value.trim().toLowerCase();
     const userDate = document.getElementById("Publication_date").value.trim();
     const userJournal = document.getElementById("Publication_journal").value.trim().toLowerCase();
 
-    if (!doi || !userTitle || !userDate || !userJournal) {
-        alert("Please fill all fields.")
+    const usertype =  document.getElementById("Publication_type").value;
+    const coAuthors =  document.getElementById("Publication_CoAuthors").value.split(",").map(name => name.trim());
+    const indexedIn =  document.getElementById("Publication_Indexed").value;
+    const role = document.getElementById("Author_Role").value;
+    const abstract = document.getElementById("Publication_text").value;
+
+    if (!doi || !userTitle || !userDate || !userJournal || !usertype || !coAuthors || !indexedIn || !role || !abstract) {
+        alert("Please fill all fields.");
         return;
     }
 
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = '<span style="color: orange; font-weight: bold">Pending</span>';
+  
     try {
         const response = await fetch(`https://api.crossref.org/works/${doi}`);
         const data = await response.json();
@@ -33,6 +40,7 @@ async function verifyDOI() {
             const author = publication.author.map(a => `${a.given} ${a.family}`).join(", ");
             const publishedDate = publication.published["date-parts"][0].join("-");
             const journal = (publication["container-title"][0] || "").toLowerCase();
+            const type = publication.type || "N/A";
 
             const userDateObject = new Date(userDate);
             let dateMatch = false;
@@ -47,13 +55,14 @@ async function verifyDOI() {
               dateMatch = true;
             }
 
-            const titleMatch = title.includes(userTitle);
-            const journalMatch = journal.includes(userJournal);
+            const titleMatch = title === userTitle;
+            const journalMatch = journal === userJournal;
 
             console.log(title);
             console.log(author);
             console.log(publishedDate);
             console.log(journal);
+            console.log(type)
 
             if (titleMatch && dateMatch && journalMatch) {
                     resultDiv.innerHTML = '<span style="color: green; font-weight: bold">Verified</span>';
@@ -78,6 +87,7 @@ document.getElementById("publication").addEventListener("submit", async function
   const user = auth.currentUser;
   if (!user) {
     alert("User not logged in");
+    window.location.href = "auth.html";
     return;
   }
   const doi = document.getElementById("Publication_DOI").value;
@@ -91,6 +101,30 @@ document.getElementById("publication").addEventListener("submit", async function
     return;
   }
 
+  const PDFInput = document.getElementById('Publication_pdf').files[0];
+
+  const IndexProof = document.getElementById("Publication_Indexing").files[0];
+
+
+  if (!PDFInput) {
+    alert("Please upload publication pdf.");
+    return;
+  }
+  if(!IndexProof){
+    alert("Please upload indexing proof.");
+    return;
+  }
+
+let uploadedPDFUrl = "";
+let uploadedIndexURL = "";
+  try {
+  uploadedPDFUrl = await uploadToCloudinary(PDFInput);
+  uploadedIndexURL = await uploadToCloudinary(IndexProof);
+  // Save `uploadedUrl` to Firestore or use in your app
+  } catch (error) {
+    alert("Failed to upload file.");
+  }
+
   const data = {
     title: document.getElementById("Publication_title").value,
     type: document.getElementById("Publication_type").value,
@@ -102,22 +136,30 @@ document.getElementById("publication").addEventListener("submit", async function
     role: document.getElementById("Author_Role").value,
     abstract: document.getElementById("Publication_text").value,
     userId: user.uid,
-    email: user.email
+    email: user.email,
+    pdfURL: uploadedPDFUrl,
+    IndexURL: uploadedIndexURL
   };
 
   try {
     await addDoc(collection(db, "Publication"), data);
-    alert("Publication submitted successfully!");
-     // Call this after adding the publication or project
+    // Call this after adding the publication or project
     await addDoc(collection(db, "ActivityLogs"), {
-    userId: user.uid,
-    email: user.email,
-    type: "Publication",
-    title: data.title,
-    timestamp: serverTimestamp()
+      userId: user.uid,
+      email: user.email,
+      type: "Publication",
+      title: data.title,
+      timestamp: serverTimestamp()
     });
     document.querySelectorAll("#publication input, #publication select, #publication textarea").forEach(el => el.value = "");
-    loadRecentActivities(user);
+    await loadPublications(user);
+    await loadRecentActivities(user);
+    alert("Publication submitted successfully!");
+
+    const countElement = document.getElementById("publication-count");
+    const q = query(collection(db, "Publication"), where("userId", "==", user.userID));
+    const querySnapshot = await getDocs(q);
+    countElement = querySnapshot.size;
   } catch (error) {
     console.error("Error adding document:", error);
     alert("Failed to submit publication.");
@@ -126,6 +168,34 @@ document.getElementById("publication").addEventListener("submit", async function
 
 document.getElementById("cancel-button").addEventListener("click",function(e){
     e.preventDefault();
+    document.getElementById("result").innerHTML = "";
     document.querySelectorAll("#publication input, #publication select, #publication textarea").forEach(el => el.value = "");
 });
 
+
+// uploadToCloudinary
+
+async function uploadToCloudinary(fileInput) {
+  const formData = new FormData();
+  formData.append("file", fileInput);
+  formData.append("upload_preset", "faculty_uploads"); // Your preset
+  formData.append("folder", "myfiles"); // Folder in Cloudinary
+
+  try {
+    const res = await fetch("https://api.cloudinary.com/v1_1/dku72t1ue/upload", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await res.json();
+
+    if (data.secure_url) {
+      return data.secure_url; // ✅ Return the uploaded file URL
+    } else {
+      throw new Error(data.error?.message || "Upload failed");
+    }
+  } catch (err) {
+    console.error("Upload failed:", err);
+    throw err; // Re-throw so the calling code can handle it
+  }
+}

@@ -12,6 +12,7 @@ async function StoreintoDB() {
     const user = auth.currentUser;
     if (!user) {
        alert("User not logged in");
+       window.location.href = "auth.html";
        return;
     } 
 
@@ -41,9 +42,14 @@ async function StoreintoDB() {
     });
 
     alert("Project added successfully!");
+    const countProject = document.getElementById("project-count");
+    const q2 = query(collection(db, "Projects"), where("userId", "==", user.userID));
+    const querySnapshot2 = await getDocs(q2);
+    countProject = querySnapshot2.size;
+
     document.getElementById('projectForm').reset();
-     loadPublications(user);
-    loadRecentActivities(user);
+  
+    await loadRecentActivities(user);
   } catch (error) {
     console.error("Error adding document:", error);
     alert("Failed to submit project.");
