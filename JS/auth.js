@@ -98,9 +98,7 @@ async function login() {
 
         const userDoc = await getDoc(doc(db, "Users", user.uid));
         if (userDoc.exists()) {
-            const role = userDoc.data().role;
-            console.log("Login Successfully! Role:", role);
-            
+            const role = userDoc.data().role;            
             localStorage.setItem("loggedInUserId", user.uid);
             
             // Redirect based on role
@@ -132,10 +130,16 @@ async function login() {
 }
 
 function redirectUser(role) {
+    const overlay = document.getElementById('loading-overlay');
+    overlay.style.display = 'flex';
     if (role === "faculty") {
-        window.location.href = "Dashboard.html"; // Redirect to Faculty Dashboard
+        setTimeout(() => {
+            window.location.href = "Dashboard.html"; // Redirect to Faculty Dashboard
+        }, 5000);
     } else if (role === "admin") {
-        window.location.href = "Admin.html"; // Redirect to Admin Dashboard
+        setTimeout(() => {
+            window.location.href = "Admin.html"; // Redirect to Admin Dashboard
+        }, 5000);
     } else {
         console.log("Invalid role. Redirecting to default page.");
         window.location.href = "index.html"; // Default redirection

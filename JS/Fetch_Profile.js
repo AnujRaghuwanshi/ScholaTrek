@@ -7,33 +7,39 @@ document.addEventListener("DOMContentLoaded", function (e) {
     event.preventDefault();
     logout();
 });
+  // Check auth state on page load
+  auth.onAuthStateChanged(function (user) {
+    if (user) {
+      fetchUserDetails(user.uid);
+    } else {
+      alert("Session expired. Please log in again.");
+      window.location.href = "auth.html";
+    }
+  });
+   updateProfileCard();
+
 });
 
-
-// When page loads
-window.onload = async function() {
-    const userId = localStorage.getItem("loggedInUserId");
-
-    if (userId) {
-        fetchUserDetails(userId);
-    } else {
-        // If UID not found, force logout or go back to login
-        alert("Session expired. Please login again.");
-        window.location.href = "auth.html";
-    }
-}
-
+let fetched = false;
 async function fetchUserDetails(uid) {
     try {
         const userDocRef = doc(db, "Users", uid);
         const userDocSnap = await getDoc(userDocRef);
 
         if (userDocSnap.exists()) {
-            const userData = userDocSnap.data();
+            const userData = {
+                name : userDocSnap.data().name,
+                role : userDocSnap.data().role,
+                department : userDocSnap.data().department,
+                email : userDocSnap.data().email,
+                employeeCode : userDocSnap.data().employeeCode,
+        }
+        localStorage.setItem("userProfile", JSON.stringify(userData)); 
+           
+            fetched =- true;
 
-            updateProfileCard(userData);
         } else {
-            alert("User document not found. Please contact support.");
+            alert("User record not found.");
         }
     } catch (error) {
         console.error(error);
@@ -42,17 +48,23 @@ async function fetchUserDetails(uid) {
     }
 }
 
-function updateProfileCard(userData) {
-    document.getElementById("user-name").innerText = userData.name || "No Name";
-    document.getElementById("profile-name").innerText = userData.name || "No Name";
-    document.getElementById("user-role").innerText = userData.role.toUpperCase() || "No Role";
-    document.getElementById("user-department").innerText = userData.department.toUpperCase() || "No Department";
-    document.getElementById("user-email").innerText = userData.email || "No Email";
-    document.getElementById("user-employee-code").innerText = userData.employeeCode || "No Code";
+function updateProfileCard() {
+    const userProfile = JSON.parse(localStorage.getItem("userProfile"));
+    if(userProfile){
+    document.getElementById("user-name").innerText = userProfile.name || "No Name";
+    document.getElementById("profile-name").innerText = userProfile.name || "No Name";
+    document.getElementById("user-role").innerText = userProfile.role.toUpperCase() || "No Role";
+    document.getElementById("user-department").innerText = userProfile.department.toUpperCase() || "No Department";
+    document.getElementById("user-email").innerText = userProfile.email || "No Email";
+    document.getElementById("user-employee-code").innerText = userProfile.employeeCode || "No Code";
 
-    const initial = (userData.name && userData.name[0]) ? userData.name[0].toUpperCase() : "?";
+    const initial = (userProfile.name && userProfile.name[0]) ? userProfile.name[0].toUpperCase() : "?";
     document.getElementById("user-initial").innerText = initial;
     document.getElementById("profile-initial").innerText = initial;
+    }else{
+        console.warn("No cached profile found. Redirecting to login...");
+        window.location.href = "auth.html";
+    }
 }
 
 async function logout() {
@@ -67,6 +79,7 @@ async function logout() {
         if (result.isConfirmed) {
             try{
                 await signOut(auth);
+                localStorage.clear();
                 window.location.href = "auth.html";
 
             }catch(error){
