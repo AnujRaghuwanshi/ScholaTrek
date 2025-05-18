@@ -11,10 +11,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
   auth.onAuthStateChanged(function (user) {
     if (user) {
       fetchUserDetails(user.uid);
-    } else {
-      alert("Session expired. Please log in again.");
-      window.location.href = "auth.html";
-    }
+    } 
   });
    updateProfileCard();
 

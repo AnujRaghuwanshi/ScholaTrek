@@ -1,6 +1,6 @@
 import { auth, db } from "./firebaseConfig.js";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged,setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
-import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+import { doc, setDoc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", function (e) {
  
@@ -15,16 +15,41 @@ document.addEventListener("DOMContentLoaded", function (e) {
     });
 });
 
+
+async function checkEmployeeCodeExists(employeeCode) {
+  const usersRef = collection(db, "Users");
+  const q = query(usersRef, where("employeeCode", "==", employeeCode));
+
+  const querySnapshot = await getDocs(q);
+
+  return !querySnapshot.empty; // true if exists, false otherwise
+}
+
 // Sign Up Function
 async function signUp() {
     const name = document.getElementById('full-name').value;
     const role = document.getElementById('user-type').value;
     const Ecode = document.getElementById('employee-code').value;   
-    const Ccode = document.getElementById('college-code').value; 
+    const Ccode = document.getElementById('college-code').value;
+    const JoiningDate = document.getElementById('JoiningDate').value;
     const email = document.getElementById("signup-email").value;
     const dept = document.getElementById('department').value;
     const password = document.getElementById("signup-password").value;
     const confirm_password = document.getElementById('confirm-password').value;
+
+    //Date Validation
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); 
+    const yyyy = today.getFullYear();
+
+    const formatted = `${yyyy}-${mm}-${dd}`;
+    const joindate = new Date(JoiningDate);
+    const curr = new Date(formatted);
+    if(joindate > curr){
+        alert("Invalid date input.");
+        return;
+    }
 
      // Check if all fields are filled
      if (!name || !role || !Ecode || !email || !dept || !password || !confirm_password) {
@@ -38,10 +63,17 @@ async function signUp() {
         return;
     }
 
+    const exists = await checkEmployeeCodeExists(Ecode);
+    if(exists){
+        alert("Wrong Employee Code.");
+        return;
+    }
+ 
 
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
+       
 
         // Store user data in Firestore
         await setDoc(doc(db, "Users", user.uid), {
@@ -51,14 +83,13 @@ async function signUp() {
             role: role,
             employeeCode: Ecode,
             CollegeCode: Ccode,
+            JoiningDate: JoiningDate,
             department: dept,
             password: password,
             createdAt: new Date().toISOString(), // Store timestamp
-            learningProgress: {} // Empty object to store progress later
-        });
-        
+        });        
         alert("Account created successfully!");
-        window.location.href = "Admin.html";
+        window.location.href = "auth.html";
     } catch (error) {
         switch (error.code) {
             case "auth/network-request-failed":
